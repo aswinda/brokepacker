@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+use App\Model\Packages as Packages;
 
 class HomeController extends Controller {
 
@@ -20,7 +21,7 @@ class HomeController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth');
+		$this->middleware('guest');
 	}
 
 	/**
@@ -30,7 +31,10 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$packages = Packages::all();
+		
+		return view('frontend.index')
+			->with('packages', $packages);
 	}
 
 }
